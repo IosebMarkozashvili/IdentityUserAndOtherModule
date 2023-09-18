@@ -1,9 +1,9 @@
-﻿using CWork.CQRS.Loan.Command;
+﻿using CWork.CQRS_Features.Loan.Command;
 using CWork.Db;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace CWork.CQRS.Loan.Handler
+namespace CWork.CQRS_Features.Loan.Handler
 {
     public class UpdateLoanApplicationCommandHandler : IRequestHandler<UpdateLoanApplicationCommand, Unit>
     {

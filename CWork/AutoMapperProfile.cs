@@ -4,9 +4,9 @@ using CWork.Models;
 
 namespace CWork
 {
-    public class YourAutoMapperProfile : Profile
+    public class AutoMapperProfile : Profile
     {
-        public YourAutoMapperProfile()
+        public AutoMapperProfile()
         {
             CreateMap<LoanApplication, LoanApplicationDto>();
             CreateMap<LoanApplicationDto, LoanApplication>();

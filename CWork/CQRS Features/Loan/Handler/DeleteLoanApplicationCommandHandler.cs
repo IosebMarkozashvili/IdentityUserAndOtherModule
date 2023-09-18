@@ -1,10 +1,10 @@
-﻿using CWork.CQRS.Loan.Command;
+﻿using CWork.CQRS_Features.Loan.Command;
 using CWork.Db;
 using CWork.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace CWork.CQRS.Loan.Handler
+namespace CWork.CQRS_Features.Loan.Handler
 {
     public class DeleteLoanApplicationCommandHandler : IRequestHandler<DeleteLoanApplicationCommand, Unit>
     {

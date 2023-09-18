@@ -1,15 +1,12 @@
-﻿using CWork.CQRS.Loan.Command;
-using CWork.CQRS.Loan.Query;
+﻿
+
+using CWork.CQRS_Features.Loan.Command;
+using CWork.CQRS_Features.Loan.Query;
 using CWork.DTO;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 [Authorize]
 [ApiController]
@@ -29,7 +26,6 @@ public class LoanApplicationController : ControllerBase
     {
         var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         var logMessage = $"Action: {actionName}, UserId: {userId}, Result: {result}";
-
         _logger.LogInformation(logMessage);
     }
 
@@ -163,6 +159,4 @@ public class LoanApplicationController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
         }
     }
-
-    // Other actions...
 }

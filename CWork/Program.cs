@@ -1,10 +1,7 @@
-
-
 using CWork;
 using CWork.Db;
 using CWork.Models;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -16,21 +13,15 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-
-
-
-
 Log.Logger = new LoggerConfiguration()
           .WriteTo.Console() // Optional: Write logs to the console
           .WriteTo.File(
-              BoService.GetLogUrl(),
+              BoService.GetLogUrl(builder.Configuration["Logging:FileEnvirment"], builder.Configuration["Logging:FileName"]),
               retainedFileCountLimit: null,
               rollOnFileSizeLimit: true) // Organize logs by year, month, and day
           .CreateLogger();
 
-builder.Logging.AddSerilog(); // Use AddSerilog to configure Serilog
+builder.Logging.AddSerilog(); 
 
 builder.Services.AddLogging();
 
@@ -40,7 +31,7 @@ builder.Services.AddLogging();
 var connectionString = builder.Configuration["ConnectionString:DefaultConnection"];
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString)); // Use your database provider
+    options.UseSqlServer(connectionString));
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -64,46 +55,6 @@ builder.Services.AddAuthentication(options =>
 });
 
 
-
-//var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your-secret-key")); // Same secret key as in the login method
-//var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-//builder.Services.AddAuthentication(options =>
-//{
-//    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-//    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-//    options.DefaultSignOutScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-//    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-//})
-//.AddCookie(options =>
-//{
-//    options.Cookie.Name = "YourAuthCookieName"; // Change this to a unique name
-//    options.Cookie.HttpOnly = true;
-//    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-//    options.SlidingExpiration = true;
-//    options.LoginPath = "/api/loan-applications/login";
-//})
-//.AddJwtBearer(options =>
-//{
-//    options.TokenValidationParameters = new TokenValidationParameters
-//    {
-//        ValidateIssuer = true,
-//        ValidateAudience = true,
-//        ValidateLifetime = true,
-//        ValidateIssuerSigningKey = true,
-//        ValidIssuer = "your-issuer",
-//        ValidAudience = "your-audience",
-//        IssuerSigningKey = key,
-//    };
-//});
-
-
-
-
-
-
-
-//builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

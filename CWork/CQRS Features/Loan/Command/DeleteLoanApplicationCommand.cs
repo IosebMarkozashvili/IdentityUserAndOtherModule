@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace CWork.CQRS.Loan.Command
+namespace CWork.CQRS_Features.Loan.Command
 {
     public class DeleteLoanApplicationCommand : IRequest<Unit>
     {

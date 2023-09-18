@@ -1,7 +1,7 @@
 ﻿using CWork.Models;
 using MediatR;
 
-namespace CWork.CQRS.Loan.Command
+namespace CWork.CQRS_Features.Loan.Command
 {
     public class CreateLoanApplicationCommand : IRequest<int>
     {

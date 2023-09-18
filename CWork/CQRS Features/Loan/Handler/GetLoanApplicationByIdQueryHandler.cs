@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using CWork.CQRS.Loan.Query;
+using CWork.CQRS_Features.Loan.Query;
 using CWork.Db;
 using CWork.DTO;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace CWork.CQRS.Loan.Handler
+namespace CWork.CQRS_Features.Loan.Handler
 {
     public class GetLoanApplicationByIdQueryHandler : IRequestHandler<GetLoanApplicationByIdQuery, LoanApplicationDto>
     {
